@@ -1,0 +1,12 @@
+---
+datadog:
+  apiKey: ${datadog_api_key}
+  site: ${datadog_site}
+  kubeStateMetricsCore:
+    enabled: true
+  clusterName: ${cluster_name} 
+  ignoreAutoConfig:
+  - cilium
+clusterAgent:
+  replicas: 2
+  createPodDisruptionBudget: true
