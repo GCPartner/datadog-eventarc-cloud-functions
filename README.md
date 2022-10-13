@@ -16,7 +16,7 @@ This [Terraform](http://terraform.io) module will allow you to deploy [Google Cl
 ### Accounts Needed
 * [PhoenixNAP](https://phoenixnap.com/bare-metal-cloud)
 * [Google Cloud Account](https://console.cloud.google.com/)
-* [Google Cloud Account](https://console.cloud.google.com/](https://www.datadoghq.com/free-datadog-trial/)
+* [Datadog](https://www.datadoghq.com/free-datadog-trial/)
 
 ### Other
 * A domain name or subdomain you control DNS for
