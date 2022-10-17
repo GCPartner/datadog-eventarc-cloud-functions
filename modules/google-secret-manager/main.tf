@@ -3,18 +3,7 @@ resource "google_project_service" "enable_secret_manager_api" {
   service            = "secretmanager.googleapis.com"
   disable_on_destroy = false
   provisioner "local-exec" {
-    command = <<EOF
-      for i in {1..10}; do
-        echo "Sleeping $i seconds to wait for Cloud Functions API to be enabled"
-        sleep $i
-        if gcloud services list --project="${var.gcp_project_id}" | grep "secretmanager.googleapis.com"; then
-          exit 0
-        fi
-        echo "Service not enabled yet..."
-      done
-      echo "Service was not enabled after 15s"
-      exit 1
-    EOF
+    command = "sleep 30"
   }
 }
 
