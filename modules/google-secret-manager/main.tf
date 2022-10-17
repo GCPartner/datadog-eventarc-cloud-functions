@@ -2,6 +2,19 @@ resource "google_project_service" "enable_secret_manager_api" {
   project            = var.gcp_project_id
   service            = "secretmanager.googleapis.com"
   disable_on_destroy = false
+  provisioner "local-exec" {
+    command = <<EOF
+      for i in {1..5}; do
+        sleep $i
+        if gcloud services list --project="${google_project.demo.project_id}" | grep "cloudkms.googleapis.com"; then
+          exit 0
+        fi
+      done
+
+      echo "Service was not enabled after 15s"
+      exit 1
+    EOF
+  }
 }
 
 resource "google_secret_manager_secret" "pnap_client_id" {
