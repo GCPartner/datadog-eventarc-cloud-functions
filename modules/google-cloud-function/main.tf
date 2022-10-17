@@ -4,10 +4,23 @@ locals {
   cloud_function_name        = "scale-up-${var.cluster_name}"
 }
 
-resource "google_project_service" "enable_secret_manager_api" {
+resource "google_project_service" "enable_cloud_function_api" {
   project            = var.gcp_project_id
-  service            = "secretmanager.googleapis.com"
+  service            = "cloudfunctions.googleapis.com"
   disable_on_destroy = false
+  provisioner "local-exec" {
+    command = <<EOF
+      for i in {1..5}; do
+        sleep $i
+        if gcloud services list --project="${var.gcp_project_id}" | grep "cloudfunctions.googleapis.com"; then
+          exit 0
+        fi
+      done
+
+      echo "Service was not enabled after 15s"
+      exit 1
+    EOF
+  }
 }
 
 data "template_file" "main_py" {
