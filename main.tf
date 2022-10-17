@@ -53,3 +53,14 @@ module "google-secret-manager" {
   network_details    = module.baremetal-anthos-cluster.network_details
   gcp_project_id     = var.gcp_project_id
 }
+
+module "google-cloud-function" {
+  depends_on = [
+    module.google-secret-manager
+  ]
+  source                    = "./modules/google-cloud-function"
+  gcp_project_id            = var.gcp_project_id
+  cluster_name              = module.baremetal-anthos-cluster.cluster_name
+  secret_manager_project_id = module.google-secret-manager.secret_manager_project_id
+  eventarc_topic             = var.eventarc_topic
+}

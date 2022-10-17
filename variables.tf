@@ -69,3 +69,8 @@ variable "operating_system" {
   default     = "ubuntu_20_04"
   description = "The Operating system to deploy (Only ubuntu_20_04 has been tested)"
 }
+
+variable "eventarc_topic" {
+  type = string
+  description = "The Pub/Sub topic that is generated after the datadog integration"
+}

@@ -49,11 +49,11 @@ resource "google_secret_manager_secret_version" "pnap_server_config" {
       os             = var.operating_system
       privateNetwork = {
         id = var.network_details.private_network.id
-        ip = cidrhost(var.network_details.private_network.cidr, var.worker_node_count + 6)
+        ip = cidrhost(var.network_details.private_network.cidr, var.worker_node_count + 5)
       },
       publicNetwork = {
         id   = var.network_details.public_network.id
-        ip   = cidrhost(var.network_details.public_network.cidr, var.worker_node_count + 6)
+        ip   = cidrhost(var.network_details.public_network.cidr, var.worker_node_count + 5)
         cidr = var.network_details.public_network.cidr
       },
       ssh_private_key = base64encode(var.ssh_key.private_key)
