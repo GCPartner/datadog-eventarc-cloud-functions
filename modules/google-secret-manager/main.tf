@@ -6,7 +6,7 @@ resource "google_project_service" "enable_secret_manager_api" {
     command = <<EOF
       for i in {1..5}; do
         sleep $i
-        if gcloud services list --project="${google_project.demo.project_id}" | grep "cloudkms.googleapis.com"; then
+        if gcloud services list --project="${var.gcp_project_id}" | grep "secretmanager.googleapis.com"; then
           exit 0
         fi
       done
