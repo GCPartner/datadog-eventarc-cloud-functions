@@ -78,9 +78,9 @@ resource "google_cloudfunctions2_function" "function" {
   }
   service_config {
     service_account_email = google_service_account.cloud-function-service-account.email
-    available_memory               = "256M"
-    max_instance_count             = 100
-    timeout_seconds                = 60 
+    available_memory      = "256M"
+    max_instance_count    = 100
+    timeout_seconds       = 60
   }
   event_trigger {
     trigger_region = local.gcp_region

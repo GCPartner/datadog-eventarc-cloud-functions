@@ -71,6 +71,6 @@ variable "operating_system" {
 }
 
 variable "eventarc_topic" {
-  type = string
+  type        = string
   description = "The Pub/Sub topic that is generated after the datadog integration"
 }

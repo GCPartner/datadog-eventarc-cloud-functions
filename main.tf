@@ -20,7 +20,8 @@ module "google-cloud-dns" {
 
 module "on-prem-services" {
   depends_on = [
-    module.baremetal-anthos-cluster
+    module.baremetal-anthos-cluster,
+    module.google-cloud-dns
   ]
   source          = "./modules/on-prem-services"
   ssh_key_path    = module.baremetal-anthos-cluster.ssh_key_path
@@ -62,5 +63,6 @@ module "google-cloud-function" {
   gcp_project_id            = var.gcp_project_id
   cluster_name              = module.baremetal-anthos-cluster.cluster_name
   secret_manager_project_id = module.google-secret-manager.secret_manager_project_id
-  eventarc_topic             = var.eventarc_topic
+  eventarc_topic            = var.eventarc_topic
 }
+

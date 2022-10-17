@@ -31,6 +31,6 @@ output "secret_manager_project_id" {
 }
 
 output "kubeconig" {
-  value = module.baremetal-anthos-cluster.kubeconfig
+  value     = module.baremetal-anthos-cluster.kubeconfig
   sensitive = true
 }
