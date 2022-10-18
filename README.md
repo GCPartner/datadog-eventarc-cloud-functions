@@ -4,7 +4,7 @@
 
 This [Terraform](http://terraform.io) module will allow you to deploy [Google Cloud's Anthos on Baremetal](https://cloud.google.com/anthos) on [PhoenixNAP](http://phoenixnap.com), Cloud Functions and Eventarc on [Google Cloud](https://cloud.google.com). This module then deploys a [MicroServices](https://github.com/GoogleCloudPlatform/microservices-demo) application, with the web frontend and middlware, and the backend database being hosted on an Anthos Cluster on  PhoenixNAP's Bare Metal Cloud. We then use [External DNS](https://github.com/kubernetes-sigs/external-dns) to create DNS records on the fly for our website, and [Cert Manager](https://cert-manager.io/) to get a valid SSL Certificate as well.
 
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2FGCPartner%2Fdatadog-eventarc-cloud-functions)
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2FGCPartner%2Fdatadog-eventarc-cloud-functions&cloudshell_open_in_editor=scripts%2Fsetup.sh&cloudshell_tutorial=tutorial.md)
 
 ## Prerequisites 
 ### Software to Install
