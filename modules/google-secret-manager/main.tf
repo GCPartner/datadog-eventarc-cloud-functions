@@ -3,7 +3,7 @@ resource "google_project_service" "enable_secret_manager_api" {
   service            = "secretmanager.googleapis.com"
   disable_on_destroy = false
   provisioner "local-exec" {
-    command = "sleep 30"
+    command = "sleep 60"
   }
 }
 

@@ -1,5 +1,5 @@
 resource "google_service_account" "cloud_dns" {
-  account_id   = format("%s-external-dns-sa", var.cluster_name)
+  account_id   = format("sa-%s-dns", var.cluster_name)
   display_name = format("Anthos Bare Metal Service Account for %s external-dns", var.cluster_name)
   project      = var.gcp_project_id
 }
