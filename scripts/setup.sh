@@ -108,7 +108,7 @@ EOF
         if [ "$user_input" == "Setup Complete!" ]; then
             break
         else
-            echo -e "${BOLDRED}Inorrect input, press Ctrl+C to exit...${ENDCOLOR}"
+            echo -e "${BOLDRED}Inorrect input, if you would like to cancel, press Ctrl+C${ENDCOLOR}"
         fi
     done
 }
