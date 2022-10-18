@@ -1,0 +1,7 @@
+keycloak-client~=0.15.4
+pnap-bmc-api~=1.1.0
+paramiko~=2.11.0
+requests~=2.28.1
+google_cloud_secret_manager~=2.12.4
+functions-framework~=3.2.0
+kubernetes~=24.2.0

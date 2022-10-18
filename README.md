@@ -85,35 +85,26 @@ ssh_command_for_pnap = "ssh -i /home/c0dyhi11/.ssh/anthos-pnap-lunch-xj62n ubunt
 ssh_key_path = "/home/c0dyhi11/.ssh/anthos-pnap-lunch-xj62n"
 website = "https://test1.codyhill.org"
 ```
+>>>>>>> e0526c63c9c4d9d7c2968b43a506d18daeb70bcb
 <!-- BEGIN_TF_DOCS -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name(s) of the clusters to be deployed | `string` | `"my-cluster"` | no |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name(s) of the clusters to be deployed | `string` | `"dash"` | no |
 | <a name="input_cloud"></a> [cloud](#input\_cloud) | The Cloud to deploy the Baremetal cluster on | `string` | `"PNAP"` | no |
 | <a name="input_pnap_client_id"></a> [pnap\_client\_id](#input\_pnap\_client\_id) | The client id for authentication to pnap | `string` | n/a | yes |
 | <a name="input_pnap_client_secret"></a> [pnap\_client\_secret](#input\_pnap\_client\_secret) | The client secret for authentication to pnap | `string` | n/a | yes |
-| <a name="input_pnap_location"></a> [pnap\_location](#input\_pnap\_location) | The pnap region to deploy nodes to | `string` | `"PHX"` | no |
+| <a name="input_pnap_location"></a> [pnap\_location](#input\_pnap\_location) | The pnap region to deploy nodes to | `string` | `"ASH"` | no |
 | <a name="input_pnap_worker_type"></a> [pnap\_worker\_type](#input\_pnap\_worker\_type) | The type of PNAP server to deploy for worker nodes | `string` | `"s2.c1.medium"` | no |
 | <a name="input_pnap_cp_type"></a> [pnap\_cp\_type](#input\_pnap\_cp\_type) | The type of PNAP server to deploy for control plane nodes | `string` | `"s2.c1.medium"` | no |
 | <a name="input_gcp_project_id"></a> [gcp\_project\_id](#input\_gcp\_project\_id) | The GCP Project ID | `string` | n/a | yes |
-| <a name="input_ansible_url"></a> [ansible\_url](#input\_ansible\_url) | The Ansible URL for the Anthos Automation | `string` | `"https://github.com/GCPartner/ansible-gcpartner-anthos-baremetal/archive/refs/heads/v0.0.1.tar.gz"` | no |
-| <a name="input_ansible_tar_ball"></a> [ansible\_tar\_ball](#input\_ansible\_tar\_ball) | The name of the ansible tarball | `string` | `"v0.0.1.tar.gz"` | no |
-| <a name="input_gcp_region"></a> [gcp\_region](#input\_gcp\_region) | The GCP Region | `string` | `"us-west4"` | no |
-| <a name="input_gke_node_count"></a> [gke\_node\_count](#input\_gke\_node\_count) | The number of worker nodes for the GKE cluster | `number` | `1` | no |
-| <a name="input_gke_release_channel"></a> [gke\_release\_channel](#input\_gke\_release\_channel) | The requested asn for Megaport | `string` | `"RAPID"` | no |
-| <a name="input_gke_machine_type"></a> [gke\_machine\_type](#input\_gke\_machine\_type) | The requested asn for Megaport | `string` | `"c2-standard-4"` | no |
-| <a name="input_gcp_router_asn"></a> [gcp\_router\_asn](#input\_gcp\_router\_asn) | The requested asn for Megaport | `number` | `16550` | no |
-| <a name="input_megaport_requested_asn"></a> [megaport\_requested\_asn](#input\_megaport\_requested\_asn) | The requested asn for Megaport | `number` | `64555` | no |
-| <a name="input_megaport_username"></a> [megaport\_username](#input\_megaport\_username) | The username for Megaport | `string` | n/a | yes |
-| <a name="input_megaport_password"></a> [megaport\_password](#input\_megaport\_password) | The password for Megaport | `string` | n/a | yes |
-| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name to use for DNS records | `string` | n/a | yes |
-| <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | The version of cert manager to install | `string` | `"v1.8.0"` | no |
-| <a name="input_email_address"></a> [email\_address](#input\_email\_address) | The email address to use with Cert Manager | `string` | n/a | yes |
-| <a name="input_pnap_network_name"></a> [pnap\_network\_name](#input\_pnap\_network\_name) | The network\_id to use when creating server in PNAP | `string` | `""` | no |
-| <a name="input_pnap_backend_megaport_vlan_id"></a> [pnap\_backend\_megaport\_vlan\_id](#input\_pnap\_backend\_megaport\_vlan\_id) | The vLan ID mapped on the MegaPort side by PNAP (Provided by PNAP) | `number` | n/a | yes |
-| <a name="input_megaport_physical_port_id"></a> [megaport\_physical\_port\_id](#input\_megaport\_physical\_port\_id) | The Physical Port ID you'll use on within the PhoenixNAP DC to connect to MegaPort | `string` | n/a | yes |
+| <a name="input_datadog_api_key"></a> [datadog\_api\_key](#input\_datadog\_api\_key) | The datadog api key | `string` | n/a | yes |
+| <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site) | The datadog api key | `string` | n/a | yes |
+| <a name="input_fqdn"></a> [fqdn](#input\_fqdn) | The fully qualified domain name for the frontend | `string` | n/a | yes |
+| <a name="input_worker_node_count"></a> [worker\_node\_count](#input\_worker\_node\_count) | How many worker nodes to deploy | `number` | `3` | no |
+| <a name="input_operating_system"></a> [operating\_system](#input\_operating\_system) | The Operating system to deploy (Only ubuntu\_20\_04 has been tested) | `string` | `"ubuntu_20_04"` | no |
+| <a name="input_eventarc_topic"></a> [eventarc\_topic](#input\_eventarc\_topic) | The Pub/Sub topic that is generated after the datadog integration | `string` | n/a | yes |
 
 ## Outputs
 
@@ -121,7 +112,7 @@ website = "https://test1.codyhill.org"
 |------|-------------|
 | <a name="output_ssh_command_for_pnap"></a> [ssh\_command\_for\_pnap](#output\_ssh\_command\_for\_pnap) | Command to run to SSH into the bastion host |
 | <a name="output_ssh_key_path"></a> [ssh\_key\_path](#output\_ssh\_key\_path) | Path to the SSH Private key for the bastion host |
-| <a name="output_pnap_bastion_host_ip"></a> [pnap\_bastion\_host\_ip](#output\_pnap\_bastion\_host\_ip) | IP Address of the bastion host in the test environment |
-| <a name="output_pnap_bastion_host_username"></a> [pnap\_bastion\_host\_username](#output\_pnap\_bastion\_host\_username) | Username for the bastion host in the test environment |
+| <a name="output_bastion_ip"></a> [bastion\_ip](#output\_bastion\_ip) | IP Address of the bastion host in the test environment |
+| <a name="output_bastion_username"></a> [bastion\_username](#output\_bastion\_username) | Username for the bastion host in the test environment |
 | <a name="output_website"></a> [website](#output\_website) | The domain the website will be hosted on. |
 <!-- END_TF_DOCS -->
