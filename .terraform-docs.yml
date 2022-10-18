@@ -1,0 +1,35 @@
+formatter: "markdown" # this is required
+
+version: ">= 0.16.0"
+
+recursive:
+  enabled: true
+  path: modules
+
+sections:
+  show: [inputs, outputs]
+
+content: ""
+
+output:
+  file: README.md
+  mode: inject
+
+sort:
+  enabled: false
+  by: name
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: true
+  html: true
+  indent: 2
+  lockfile: true
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true
