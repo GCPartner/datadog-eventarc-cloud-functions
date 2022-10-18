@@ -8,6 +8,9 @@ resource "google_project_service" "enable_secret_manager_api" {
 }
 
 resource "google_secret_manager_secret" "pnap_client_id" {
+  depends_on = [
+    google_project_service.enable_secret_manager_api
+  ]
   project   = var.gcp_project_id
   secret_id = "pnap_client_id"
   replication {
@@ -21,6 +24,9 @@ resource "google_secret_manager_secret_version" "pnap_client_id" {
 }
 
 resource "google_secret_manager_secret" "pnap_client_secret" {
+  depends_on = [
+    google_project_service.enable_secret_manager_api
+  ]
   project   = var.gcp_project_id
   secret_id = "pnap_client_secret"
   replication {
@@ -34,6 +40,9 @@ resource "google_secret_manager_secret_version" "pnap_client_secret" {
 }
 
 resource "google_secret_manager_secret" "pnap_server_config" {
+  depends_on = [
+    google_project_service.enable_secret_manager_api
+  ]
   project   = var.gcp_project_id
   secret_id = "pnap_server_config"
   replication {
@@ -68,6 +77,9 @@ resource "google_secret_manager_secret_version" "pnap_server_config" {
 }
 
 resource "google_secret_manager_secret" "kubeconfig" {
+  depends_on = [
+    google_project_service.enable_secret_manager_api
+  ]
   project   = var.gcp_project_id
   secret_id = "kubeconfig"
   replication {
@@ -79,3 +91,4 @@ resource "google_secret_manager_secret_version" "kubeconfig" {
   secret      = google_secret_manager_secret.kubeconfig.id
   secret_data = var.kubeconfig
 }
+

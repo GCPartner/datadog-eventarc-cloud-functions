@@ -4,12 +4,36 @@ locals {
   cloud_function_name        = "scale-up-${var.cluster_name}"
 }
 
+resource "google_project_service" "enable_artifact_registry_api" {
+  project            = var.gcp_project_id
+  service            = "artifactregistry.googleapis.com"
+  disable_on_destroy = false
+  provisioner "local-exec" {
+    command = "sleep 15"
+  }
+}
+
+resource "google_project_service" "enable_cloud_run_api" {
+  depends_on = [
+    google_project_service.enable_artifact_registry_api
+  ]
+  project            = var.gcp_project_id
+  service            = "run.googleapis.com"
+  disable_on_destroy = false
+  provisioner "local-exec" {
+    command = "sleep 15"
+  }
+}
+
 resource "google_project_service" "enable_cloud_function_api" {
+  depends_on = [
+    google_project_service.enable_cloud_run_api
+  ]
   project            = var.gcp_project_id
   service            = "cloudfunctions.googleapis.com"
   disable_on_destroy = false
   provisioner "local-exec" {
-    command = "sleep 30"
+    command = "sleep 15"
   }
 }
 
@@ -61,6 +85,9 @@ resource "google_project_iam_member" "role_assignment" {
 }
 
 resource "google_cloudfunctions2_function" "function" {
+  depends_on = [
+    google_project_service.enable_cloud_function_api
+  ]
   name        = local.cloud_function_name
   project     = var.gcp_project_id
   location    = local.gcp_region
