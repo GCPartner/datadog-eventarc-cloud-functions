@@ -2,35 +2,18 @@ locals {
   cloud_function_output_file = "${path.root}/function-source.zip"
   gcp_region                 = "us-central1"
   cloud_function_name        = "scale-up-${var.cluster_name}"
-}
-
-resource "google_project_service" "enable_artifact_registry_api" {
-  project            = var.gcp_project_id
-  service            = "artifactregistry.googleapis.com"
-  disable_on_destroy = false
-  provisioner "local-exec" {
-    command = "sleep 15"
-  }
-}
-
-resource "google_project_service" "enable_cloud_run_api" {
-  depends_on = [
-    google_project_service.enable_artifact_registry_api
+  enabled_apis = [
+    "artifactregistry.googleapis.com",
+    "run.googleapis.com",
+    "cloudfunctions.googleapis.com",
+    "cloudbuild.googleapis.com"
   ]
-  project            = var.gcp_project_id
-  service            = "run.googleapis.com"
-  disable_on_destroy = false
-  provisioner "local-exec" {
-    command = "sleep 15"
-  }
 }
 
-resource "google_project_service" "enable_cloud_function_api" {
-  depends_on = [
-    google_project_service.enable_cloud_run_api
-  ]
+resource "google_project_service" "enabled_apis" {
+  for_each           = toset(local.enabled_apis)
   project            = var.gcp_project_id
-  service            = "cloudfunctions.googleapis.com"
+  service            = each.value
   disable_on_destroy = false
   provisioner "local-exec" {
     command = "sleep 15"
@@ -86,7 +69,7 @@ resource "google_project_iam_member" "role_assignment" {
 
 resource "google_cloudfunctions2_function" "function" {
   depends_on = [
-    google_project_service.enable_cloud_function_api
+    google_project_service.enabled_apis
   ]
   name        = local.cloud_function_name
   project     = var.gcp_project_id
