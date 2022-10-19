@@ -36,7 +36,10 @@ Read more [here](https://docs.datadoghq.com/account_management/api-app-keys)
 ## Edit the deploy.sh script (STEP 3)
 You will need to use the information gathered in Step 2 and edit `scripts/deploy.sh` (which should be open in the cloud shell editor) and populate the following values at the top of the script:
 ```bash
-
+# Constant Variables
+GCP_REGION="us-central1"
+CLUSTER_NAME="dash2022"
+EVENTARC_CHANNEL_NAME="dash2022"
 DOMAIN="<my_domain_name>"
 GCP_PROJECT_ID="<my_google_cloud_project>"
 DATADOG_API_KEY="<my_datadog_api_key>"
