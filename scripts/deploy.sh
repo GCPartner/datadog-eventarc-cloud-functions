@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 
+# This script is inteded to be ran from the root of the git repository, like: bash /scripts/deploy.sh 
+
+
 # Constant Variables
     # OK to leave as default
 CHANNEL="dash2022"
@@ -19,9 +22,9 @@ PNAP_CLIENT_SECRET="<my_pnap_client_secret>"
 RED="\e[31m"
 GREEN="\e[32m"
 BLUE="\e[34m"
-BOLDRED="\e[1;${RED}m"
-BOLDGREEN="\e[1;${GREEN}m"
-BOLDBLUE="\e[1;${BLUE}m"
+BOLDRED="\e[1;${RED}"
+BOLDGREEN="\e[1;${GREEN}"
+BOLDBLUE="\e[1;${BLUE}"
 ENDCOLOR="\e[0m"
 
 
@@ -33,6 +36,11 @@ function install_terraform () {
     sudo rm -f terraform_1.0.11_linux_amd64.zip
     echo "PATH=$HOME/.local/bin:\$PATH" >> $HOME/.bashrc
     PATH=$HOME/.local/bin:$PATH
+}
+
+
+function set_project () {
+    gcloud config set project $GCP_PROJECT_ID
 }
 
 
@@ -70,11 +78,8 @@ function create_dns_zone () {
 
 
 function setup_terraform () {
-    git clone https://github.com/GCPartner/datadog-eventarc-cloud-functions.git
-    cd datadog-eventarc-cloud-functions/
-
     cat << EOF > terraform.tfvars
-        pnap_client_id     = "$PANP_CLIENT_ID"
+        pnap_client_id     = "$PNAP_CLIENT_ID"
         pnap_client_secret = "$PNAP_CLIENT_SECRET"
         gcp_project_id     = "$GCP_PROJECT_ID"
         datadog_api_key    = "$DATADOG_API_KEY"
@@ -90,6 +95,8 @@ EOF
 
 function wait_for_user_confirmation () {
     cat << EOF
+
+
         There are a few manual things you need to do now.
 
         1) Login to your Datadog Dashboard and setup the EventArc integration:
@@ -100,6 +107,7 @@ function wait_for_user_confirmation () {
 `for ns in $NS_SERVERS; do echo "           $ns"; done`
         $(echo -e ${ENDCOLOR})
         Once this is done...
+
 
 EOF
     while :; do
@@ -120,11 +128,12 @@ function run_terraform () {
 
 
 # Call functions
-install_terraform()
-enable_apis()
-setup_eventarc()
-create_dns_zone()
-setup_terraform()
-wait_for_user_confirmation()
-run_terraform()
+install_terraform
+set_project
+enable_apis
+setup_eventarc
+create_dns_zone
+setup_terraform
+wait_for_user_confirmation
+run_terraform
 

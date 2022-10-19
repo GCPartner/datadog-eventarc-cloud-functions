@@ -1,11 +1,11 @@
 # Closed-loop monitoring & remediation using Datadog, Eventarc, & Cloud functions (Tutorial)
-## Create Accounts (STEP 1)
-You will need to have/create three accounts:
+## Prerequisits (STEP 1)
+You will need to have/create three accounts, and a domain:
 * [PhoenixNAP](https://phoenixnap.com/bare-metal-cloud)
 * [Google Cloud Account](https://console.cloud.google.com/) - New accounts get a $300 Google Cloud credit
   * You can use the default Google Cloud Project after you create a Google Cloud accoumt.
 * [Datadog](https://www.datadoghq.com/free-datadog-trial/)
-* Some Domain
+* Domain
   * You will need a valid domain or sub-domain
   * You could use [Google Cloud Domain](https://cloud.google.com/domains/docs/register-domain)
   * If using cloud domains, you may get an error in subsiquent steps when we try and create the Cloud DNS Zone, just ignore this.
@@ -36,6 +36,7 @@ Read more [here](https://docs.datadoghq.com/account_management/api-app-keys)
 ## Edit the deploy.sh script (STEP 3)
 You will need to use the information gathered in Step 2 and edit `scripts/deploy.sh` (which should be open in the cloud shell editor) and populate the following values at the top of the script:
 ```bash
+
 DOMAIN="<my_domain_name>"
 GCP_PROJECT_ID="<my_google_cloud_project>"
 DATADOG_API_KEY="<my_datadog_api_key>"
@@ -51,14 +52,19 @@ bash scripts/deploy.sh
 This script will do almost everything for you, it will automatically pause and ask you to do the following two steps:
 * Adding the EventArc integration to DataDog
   * Login to the DataDog App
-  * Click Itegrations > Integrations
+  * Click Integrations > Integrations
   * Search for "EventArc"
   * On the EventArc "Card" click "+ Available"
   * Click on the "Configure" Tab
   * Click on "+ Add New"
   * Fill out the "CHANNEL FULL NAME" & "ACTIVATION TOKEN"
+    * These values will be automatically printed to the screen once the script has been run
   * Click the checkmark
 * Setting you Name Servers (NS) for you domain or sub-domain
   * This is different for every registrar, you'll need to refer to their documentation
+    * These values will be automatically printed to the screen once the script has been run
 
 Once those steps are confirmed you must type exactly "Setup Complete!" and strike enter, and the rest of the deployment will continue. This could take aroun 45 minutes.
+
+Thank you!
+
