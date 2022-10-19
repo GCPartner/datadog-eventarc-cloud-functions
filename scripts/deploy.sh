@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
 
-# This script is inteded to be ran from the root of the git repository, like: bash /scripts/deploy.sh 
+# This script is intended to be run from the root of the git repository (http://cutt.ly/dash2022), like: bash /scripts/deploy.sh 
+# Using the "Open in Google Cloud Shell" button is the easiest way to do this.
 
 
 # Constant Variables
-    # OK to leave as default
 CHANNEL="dash2022"
 REGION="us-central1"
 CLUSTER_NAME="dash2022" # Must match RFC 952 hostname standard, 10 char maximum or REGEX: ^[a-z0-9]+(-[a-z0-9]+)$
-    # Need to change
 DOMAIN="<my_domain_name>" # This must be a public DNS Zone that you own and can change the NS Records. A subdomin is fine like foo.bar.com
 GCP_PROJECT_ID="<my_google_cloud_project>"
 DATADOG_API_KEY="<my_datadog_api_key>"
