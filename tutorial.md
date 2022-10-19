@@ -65,7 +65,7 @@ The script executed in the previous step will do almost everything for you, it w
   * This is different for every registrar, you'll need to refer to their documentation
     * These values will be automatically printed to the screen once the script has been run
 
-Once those steps are confirmed you must type exactly "Setup Complete!" and strike enter, and the rest of the deployment will continue. This could take aroun 45 minutes.
+Once those steps are confirmed you must type exactly "Setup Complete!" and strike enter, and the rest of the deployment will continue. This could take around 45 minutes.
 
 ## Setup your monitor in DataDog (STEP 6)
 * Login to the DataDog App
