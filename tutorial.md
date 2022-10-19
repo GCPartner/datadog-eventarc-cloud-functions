@@ -68,6 +68,7 @@ The script executed in the previous step will do almost everything for you, it w
 Once those steps are confirmed you must type exactly "Setup Complete!" and strike enter, and the rest of the deployment will continue. This could take around 45 minutes.
 
 ## Setup your monitor in DataDog (STEP 6)
+Now that your Kubernetes cluster has been deployed, it has automatically installed the DataDog agent into the Kubernetes cluster. This agent will use the provided `DATADOG_API_KEY` & `DATADOG_APP_URL` to enroll your cluster into DataDog. Now we need to setup a monitor for this cluster.
 * Login to the DataDog App
 * Click Monitors > New Monitor
 * Click Metric
@@ -81,7 +82,7 @@ Once those steps are confirmed you must type exactly "Setup Complete!" and strik
   * Right below the word `Edit` name your monitor something like `System CPU Average for <cluster_name>`
 * Leave everything else default, and click "Create"
 
-## Done
+## Finish the Deployment
 Now that all of this is setup, DataDog will monitor for the CPU threshold. If the combined CPU of your nodes rise above the threshold that you have configured in "Step 6", the alert will be trigged. Then DataDog will send a message to EventArc and trigger Cloud Functions to add an additional node to your cluster. 
 
 The monitor will take some time to collect metrics, so please be paitent.
