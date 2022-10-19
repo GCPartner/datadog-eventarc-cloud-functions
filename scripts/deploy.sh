@@ -64,8 +64,8 @@ function enable_apis () {
 
 function setup_eventarc () {
     gcloud eventarc channels create $CHANNEL --provider datadog --location $REGION
-    CHANNEL_FULL_NAME=`gcloud eventarc channels describe $CHANNEL --location $REGION | grep "name:"`
-    DATADOG_ACTIVATION_TOKEN=`gcloud eventarc channels describe $CHANNEL --location $REGION | grep "activationToken:"`
+    CHANNEL_FULL_NAME=`gcloud eventarc channels describe $CHANNEL --location $REGION | grep "name:" | awk '{print $2}'`
+    DATADOG_ACTIVATION_TOKEN=`gcloud eventarc channels describe $CHANNEL --location $REGION | grep "activationToken:" | awk '{print $2}'`
     PUBSUB_TOPIC_NAME=`gcloud pubsub topics list | grep $CHANNEL | awk '{print $2}'`
 }
 
