@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 
 
-# This script is inteded to be ran from the root of the git repository, like: bash /scripts/deploy.sh 
+# This script is intended to be run from the root of the git repository (http://cutt.ly/dash2022), like: bash /scripts/deploy.sh 
+# Using the "Open in Google Cloud Shell" button is the easiest way to do this.
 
 
 # Constant Variables
-    # OK to leave as default
-CHANNEL="dash2022"
-REGION="us-central1"
+GCP_REGION="us-central1"
 CLUSTER_NAME="dash2022" # Must match RFC 952 hostname standard, 10 char maximum or REGEX: ^[a-z0-9]+(-[a-z0-9]+)$
-    # Need to change
-DOMAIN="<my_domain_name>" # This must be a public DNS Zone that you own and can change the NS Records. A subdomin is fine like foo.bar.com
+EVENTARC_CHANNEL_NAME="dash2022"
+DOMAIN="<my_domain_name>" # This must be a public DNS Zone that you own and can change the NS Records. A subdomin is also fine such as foo.bar.com
 GCP_PROJECT_ID="<my_google_cloud_project>"
 DATADOG_API_KEY="<my_datadog_api_key>"
 DATADOG_APP_URL="<my_datadog_site>"
@@ -63,10 +62,10 @@ function enable_apis () {
 
 
 function setup_eventarc () {
-    gcloud eventarc channels create $CHANNEL --provider datadog --location $REGION
-    CHANNEL_FULL_NAME=`gcloud eventarc channels describe $CHANNEL --location $REGION | grep "name:"`
-    DATADOG_ACTIVATION_TOKEN=`gcloud eventarc channels describe $CHANNEL --location $REGION | grep "activationToken:"`
-    PUBSUB_TOPIC_NAME=`gcloud pubsub topics list | grep $CHANNEL | awk '{print $2}'`
+    gcloud eventarc channels create $EVENTARC_CHANNEL_NAME --provider datadog --location $REGION
+    CHANNEL_FULL_NAME=`gcloud eventarc channels describe $EVENTARC_CHANNEL_NAME --location $REGION | grep "name:" | awk '{print $2}'`
+    DATADOG_ACTIVATION_TOKEN=`gcloud eventarc channels describe $EVENTARC_CHANNEL_NAME --location $REGION | grep "activationToken:" | awk '{print $2}'`
+    PUBSUB_TOPIC_NAME=`gcloud pubsub topics list | grep $EVENTARC_CHANNEL_NAME | awk '{print $2}'`
 }
 
 
